@@ -210,7 +210,7 @@
 /* Modern pagination styles */
 .modern-pagination {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   margin-top: 24px;
   gap: 8px;
@@ -270,12 +270,12 @@
 
 .pagination-number:hover:not(.ellipsis):not(.active) {
   background-color: #f3f4f6;
-  color: #6600CC;
+  color: #00A1F9;
 }
 
 .pagination-number.active {
-  background-color: #6600CC0D;
-  color: #6600CC;
+  background-color: #00A1F90D;
+  color: #00A1F9;
 }
 
 .pagination-number.ellipsis {
