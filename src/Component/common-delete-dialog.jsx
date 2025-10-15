@@ -24,7 +24,7 @@ function CommonDeleteDialog({
       }}
     >
       <DialogTitle>
-        <span className='dialog-title'>{title}</span>
+        {/* <span className='dialog-title'>{title}</span> */}
         <IconButton
           aria-label="close"
           onClick={() => {
@@ -45,24 +45,40 @@ function CommonDeleteDialog({
 
         <div style={{
           display: 'flex',
+          flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
           marginBottom: '20px',
+          rowGap: '10px',
         }}>
+          <img src="/delete2-icon.svg" alt="" style={{
+            width: '60px',
+            height: '60px',
+            marginBottom: '20px',
+          }}/>
           <h2 style={{
-            fontSize: '16px',
+            fontSize: '24px',
             fontWeight: '600',
             color: '#172B4D',
             margin: '0%',
-          }}>{description}</h2>
+          }}>Are you sure you want to delete?</h2>
+          <p style={{
+            fontSize: '16px',
+            fontWeight: '400',
+            color: '#172B4D',
+            margin: '0%',
+          }}>
+            {description}
+          </p>
         </div>
         <Box sx={{
           display: 'flex',
           flexDirection: 'row',
           columnGap: '2%',
-          justifyContent: 'end',
+          justifyContent: 'center',
           alignItems: 'center',
           width: '100%',
+          marginTop: '20px',
         }}>
           <CommonButton
             backgroundColor="transparent"

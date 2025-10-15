@@ -20,13 +20,11 @@ function Sidebar() {
     const path = location.pathname;
     const routeMapping = [
       { path: '/dashboard', button: 'dashboard' },
-      { path: '/companies', button: 'companies' },
       { path: '/staffs', button: 'staffs' },
       { path: '/billings', button: 'billings' },
-      { path: '/working-hours', button: 'working-hours' },
       { path: '/reports', button: 'reports' },
-      { path: '/announcements', button: 'announcements' },
-      { path: '/support-tickets', button: 'support-tickets' },
+      { path: '/queue', button: 'queue' },
+      { path: '/raise-a-dispute', button: 'raise-a-dispute' },
     ];
     const matchedRoute = routeMapping.find(route =>
       path.startsWith(route.path)
@@ -62,11 +60,6 @@ function Sidebar() {
 
 
 
-            <button onClick={() => handleButtonClick('/companies', 'companies')}
-              className={selectedButton === 'companies' ? 'sidebar-button-active' : ''}>
-              <img src="/companies-icon.svg" alt="" style={getButtonStyle('companies')} />
-              <span>Companies</span>
-            </button>
 
 
             <button onClick={() => handleButtonClick('/staffs', 'staffs')} className={selectedButton === 'staffs' ? 'sidebar-button-active' : ''}>
@@ -88,22 +81,16 @@ function Sidebar() {
               <span>Reports</span>
             </button>
 
-
-            <button onClick={() => handleButtonClick('/working-hours', 'working-hours')} className={selectedButton === 'working-hours' ? 'sidebar-button-active' : ''}>
-              <img src="/working-hours-icon.svg" alt="" style={getButtonStyle('working-hours')} />
-              <span>Working Hours</span>
+            <button onClick={() => handleButtonClick('/queue', 'queue')} className={selectedButton === 'queue' ? 'sidebar-button-active' : ''}>
+              <img src="/queue-icon.svg" alt="" style={getButtonStyle('queue')} />
+              <span>Queue</span>
             </button>
 
 
-            <button onClick={() => handleButtonClick('/announcements', 'announcements')} className={selectedButton === 'announcements' ? 'sidebar-button-active' : ''}>
-              <img src="/announcements-icon.svg" alt="" style={getButtonStyle('announcements')} />
-              <span>Announcements</span>
-            </button>
 
-
-            <button onClick={() => handleButtonClick('/support-tickets', 'support-tickets')} className={selectedButton === 'support-tickets' ? 'sidebar-button-active' : ''}>
-              <img src="/support-tickets-icon.svg" alt="" style={getButtonStyle('support-tickets')} />
-              <span>Support Tickets</span>
+            <button onClick={() => handleButtonClick('/raise-a-dispute', 'raise-a-dispute')} className={selectedButton === 'raise-a-dispute' ? 'sidebar-button-active' : ''}>
+              <img src="/raise-a-dispute-icon.svg" alt="" style={getButtonStyle('raise-a-dispute')} />
+              <span>Raise a Dispute</span>
             </button>
 
 
@@ -127,12 +114,6 @@ function Sidebar() {
 
 
 
-            <button onClick={() => handleButtonClick('/companies', 'companies')}
-              className={selectedButton === 'companies' ? 'sidebar-button-active' : ''}>
-              <img src="/companies-icon.svg" alt="" style={getButtonStyle('companies')} />
-            </button>
-
-
             <button onClick={() => handleButtonClick('/staffs', 'staffs')} className={selectedButton === 'staffs' ? 'sidebar-button-active' : ''}>
               <img src="/staffs-icon.svg" alt="" style={getButtonStyle('staffs')} />
             </button>
@@ -150,18 +131,13 @@ function Sidebar() {
             </button>
 
 
-            <button onClick={() => handleButtonClick('/working-hours', 'working-hours')} className={selectedButton === 'working-hours' ? 'sidebar-button-active' : ''}>
-              <img src="/working-hours-icon.svg" alt="" style={getButtonStyle('working-hours')} />
+            <button onClick={() => handleButtonClick('/queue', 'queue')} className={selectedButton === 'queue' ? 'sidebar-button-active' : ''}>
+              <img src="/queue-icon.svg" alt="" style={getButtonStyle('queue')} />
             </button>
 
 
-            <button onClick={() => handleButtonClick('/announcements', 'announcements')} className={selectedButton === 'announcements' ? 'sidebar-button-active' : ''}>
-              <img src="/announcements-icon.svg" alt="" style={getButtonStyle('announcements')} />
-            </button>
-
-
-            <button onClick={() => handleButtonClick('/support-tickets', 'support-tickets')} className={selectedButton === 'support-tickets' ? 'sidebar-button-active' : ''}>
-              <img src="/support-tickets-icon.svg" alt="" style={getButtonStyle('support-tickets')} />
+            <button onClick={() => handleButtonClick('/raise-a-dispute', 'raise-a-dispute')} className={selectedButton === 'raise-a-dispute' ? 'sidebar-button-active' : ''}>
+              <img src="/raise-a-dispute-icon.svg" alt="" style={getButtonStyle('raise-a-dispute')} />
             </button>
 
 

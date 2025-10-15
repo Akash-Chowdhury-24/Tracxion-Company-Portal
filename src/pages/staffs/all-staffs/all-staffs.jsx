@@ -271,7 +271,7 @@ function AllStaffs() {
       console.log("staff name", staffName);
       setDeleteDialogOpen(true);
       setDeleteDialogTitle('Delete Staff');
-      setDeleteDialogDescription(`Are you sure you want to delete ${staffName}?`);
+      setDeleteDialogDescription(`${staffName} will be deleted permanently. You can't undo this action.`);
       setDeleteDialogHandleSubmit(() => () => handleDeleteStaff(id));
     } else if (action === 'view') {
       const staff = staffsList.find(staff => staff.id === id);

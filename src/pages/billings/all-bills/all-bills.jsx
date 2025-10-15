@@ -3,7 +3,6 @@ import { globalContext } from "../../../context/context";
 import { useNavigate } from "react-router-dom";
 import CommonLoader from "../../../Component/common-loader";
 import CommonTable from "../../../Component/common-table";
-import CommonDialog from "../../../Component/common-dialog";
 
 function AllBills() {
   const { setBreadcrumbs, setPageTitle, setButtonList , setSubPageTitle} = useContext(globalContext);
@@ -66,10 +65,6 @@ function AllBills() {
   // table variables
   const billingHeaders = [
     {
-      title: 'Company Name',
-      value: 'companyName'
-    },
-    {
       title: 'Billing ID',
       value: 'billingId'
     },
@@ -100,124 +95,8 @@ function AllBills() {
   ];
   const [billingTableData, setBillingTableData] = useState([]);
   const actionButtons = [
-    { label: 'Edit', action: 'Edit' },
     { label: 'View', action: 'View' },
-    { label: 'Change Status', action: 'Change Status' },
   ]
-
-  // manage rate variables
-  const [rates, setRates] = useState({
-    voiceBillingType: 'Per Minute',
-    voiceBillingRate: 10,
-    chatBillingType: 'Per Character',
-    chatBillingRate: 10,
-  });
-  const [manageRateFromData, setManageRateFromData] = useState({
-    voiceBillingType: '',
-    voiceBillingRate: '',
-    chatBillingType: '',
-    chatBillingRate: '',
-  });
-  const [manageRateErrors, setManageRateErrors] = useState({
-    voiceBillingType: false,
-    voiceBillingRate: false,
-    chatBillingType: false,
-    chatBillingRate: false,
-  });
-  const manageRateFromSection = [
-    {
-      id: "voice billing type",
-      type: "radio 2",
-      title: "Voice Billing Type",
-      dataKey: "voiceBillingType",
-      options: [
-        { label: "Per Minute", value: "Per Minute" },
-        { label: "Per Session", value: "Per Session" },
-      ],
-      required: true,
-    },
-    {
-      type: "fields",
-      id: "voice billing rate",
-      fields: [
-        {
-          type: "number",
-          name: "voiceBillingRate",
-          label: "Voice Billing Rate",
-          placeholder: "Enter Voice Billing Rate",
-          required: true,
-          width: "full",
-        }
-      ]
-    },
-    {
-      id: "divider",
-      type: "divider",
-    },
-    {
-      id: "chat billing type",
-      type: "radio 2",
-      title: "Chat Billing Type",
-      dataKey: "chatBillingType",
-      options: [
-        { label: "Per Character", value: "Per Character" },
-        { label: "Per Session", value: "Per Session" },
-      ],
-      required: true,
-    },
-    {
-      type: "fields",
-      id: "chat billing rate",
-      fields: [
-        {
-          type: "number",
-          name: "chatBillingRate",
-          label: "Chat Billing Rate",
-          placeholder: "Enter Chat Billing Rate",
-          required: true,
-          width: "full",
-        }
-      ]
-    },
-  ];
-
-
-  // change status variables
-  const [changeStatusFromData, setChangeStatusFromData] = useState({
-    status: '',
-  });
-  const [changeStatusErrors, setChangeStatusErrors] = useState({
-    status: false,
-  });
-  const changeStatusFromSection = [
-    {
-      id: "status",
-      type: "fields",
-      fields: [
-        {
-          type: "select",
-          name: "status",
-          label: "Status",
-          options: [
-            { label: "Paid", value: "Paid" },
-            { label: "Unpaid", value: "Unpaid" },
-          ],
-          required: true,
-          width: "full",
-        }
-      ]
-    },
-  ];
-
-
-  // dialog variables
-  const [openDialog, setOpenDialog] = useState(false);
-  const [dialogTitle, setDialogTitle] = useState('');
-  const [dialogFormData, setDialogFormData] = useState({});
-  const [dialogErrors, setDialogErrors] = useState({});
-  const [dialogFromSection, setDialogFromSection] = useState([]);
-  const [dialogSubmitButtonText, setDialogSubmitButtonText] = useState('');
-  const [dialogOnSubmit, setDialogOnSubmit] = useState(() => { });
 
 
   const fetchBillingData = async () => {
@@ -235,21 +114,6 @@ function AllBills() {
       return [];
     }
   }
-  const fetchRates = async () => {
-    try {
-      const response = await fetch('');
-      const data = await response.json();
-      console.log("rates fetched", data);
-      if (data.statusCode === 200) {
-        return data.data;
-      } else {
-        return {};
-      }
-    } catch (error) {
-      console.log("error in fetching rates", error);
-      return {};
-    }
-  }
   const handleSearch = (e) => {
     const searchValue = e.target.value.trim().toLowerCase();
     setSearchTerm(searchValue);
@@ -258,50 +122,25 @@ function AllBills() {
       setFilteredBillingData(billingData);
     } else {
       const filteredData = billingData.filter((item) => {
-        const fullName = item.firstName + ' ' + item.lastName;
+        const startDate = item.startData;
+        const endDate = item.endData;
         const usage = item.usage;
+        const amount = item.amount;
+        const status = item.status;
 
-        return fullName.toLowerCase().startsWith(searchValue) || usage.toLowerCase().startsWith(searchValue);
+        return startDate.toLowerCase().startsWith(searchValue) || endDate.toLowerCase().startsWith(searchValue) || usage.toLowerCase().startsWith(searchValue) || amount.toLowerCase().startsWith(searchValue) || status.toLowerCase().startsWith(searchValue);
       });
       setFilteredBillingData(filteredData);
     }
   }
 
-  const handleManageRate = () => {
-    setOpenDialog(true);
-    setDialogTitle('Manage Rates');
-    setDialogFromSection(manageRateFromSection);
-    setDialogFormData(rates);
-    setDialogErrors(manageRateErrors);
-    setDialogSubmitButtonText('Save');
-    setDialogOnSubmit(handleManageRateSubmit);
-  }
-  const handleManageRateSubmit = (formData) => {
-    console.log("formData for manage rate", formData);
-  }
 
   useEffect(() => {
     setBreadcrumbs([
-      { title: 'All Bills', link: '/billings' },
+      { title: 'Billings', link: '/billings' },
     ]);
-    setPageTitle('All Bills');
+    setPageTitle('Billings');
     setButtonList([
-      {
-        type: 'button',
-        text: 'Manage Rates',
-        onClick: () => { handleManageRate() },
-        backgroundColor: 'transparent',
-        textColor: '#00A1F9',
-        borderColor: '#00A1F9'
-      },
-      {
-        type: 'button',
-        text: 'Create Invoice',
-        onClick: () => { navigate('create-invoice') },
-        backgroundColor: '#00A1F9',
-        textColor: 'white',
-        borderColor: '#00A1F9'
-      },
       {
         type: 'search',
         name: 'search',
@@ -315,26 +154,10 @@ function AllBills() {
 
   useEffect(() => {
     setBreadcrumbs([
-      { title: 'All Bills', link: '/billings' },
+      { title: 'Billings', link: '/billings' },
     ]);
-    setPageTitle('All Bills');
+    setPageTitle('Billings');
     setButtonList([
-      {
-        type: 'button',
-        text: 'Manage Rates',
-        onClick: () => { handleManageRate() },
-        backgroundColor: 'transparent',
-        textColor: '#00A1F9',
-        borderColor: '#00A1F9'
-      },
-      {
-        type: 'button',
-        text: 'Create Invoice',
-        onClick: () => { navigate('create-invoice') },
-        backgroundColor: '#00A1F9',
-        textColor: 'white',
-        borderColor: '#00A1F9'
-      },
       {
         type: 'search',
         name: 'search',
@@ -347,9 +170,6 @@ function AllBills() {
     const fetchingData = async () => {
       setLoading(true);
       const data = await fetchBillingData();
-      const rates = await fetchRates();
-      // setRates(rates);
-      // setBillingData(data);
       setLoading(false);
     }
     fetchingData();
@@ -363,11 +183,6 @@ function AllBills() {
     const data = searchTerm.trim() === '' ? billingData : filteredBillingData;
 
     const tableData = data.map((item) => ({
-      companyName: {
-        name: item.firstName + ' ' + item.lastName,
-        id: item.userId,
-        image: '/avatar-2.svg'
-      },
       billingId: item.id,
       startDate: item.startData,
       endDate: item.endData,
@@ -381,30 +196,11 @@ function AllBills() {
   const handleActionClick = (action, id) => {
     console.log("action", action);
     console.log("id", id);
-    if (action === 'Change Status') {
-      const bill = billingData.find((item) => item.id === id);
-      const status = bill.status;
-      setOpenDialog(true);
-      setDialogTitle('Change Status');
-      setDialogFromSection(changeStatusFromSection);
-      setDialogFormData({
-        status: status,
-      });
-      setDialogErrors(changeStatusErrors);
-      setDialogSubmitButtonText('Save');
-      setDialogOnSubmit(handleChangeStatusSubmit);
-    }
     if (action === 'View') {
       navigate(`/billings/view-invoice/${id}`);
     } 
-    if (action === 'Edit') {
-      navigate(`/billings/edit-invoice/${id}`);
-    }
   }
 
-  const handleChangeStatusSubmit = (formData) => {
-    console.log("formData for change status", formData);
-  }
 
   if (loading) {
     return <div><CommonLoader /></div>;
@@ -417,18 +213,6 @@ function AllBills() {
         handleActionClick={handleActionClick}
         specificReturn='billingId'
         actionButtons={actionButtons}
-      />
-      <CommonDialog
-        open={openDialog}
-        setOpen={setOpenDialog}
-        title={dialogTitle}
-        formData={dialogFormData}
-        setFormData={setDialogFormData}
-        errors={dialogErrors}
-        setErrors={setDialogErrors}
-        formSections={dialogFromSection}
-        submitButtonText={dialogSubmitButtonText}
-        onSubmit={dialogOnSubmit}
       />
     </div>
   );

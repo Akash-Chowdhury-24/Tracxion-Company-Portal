@@ -272,7 +272,7 @@ function AllRoles() {
     } else if (action === 'delete') {
       setDeleteDialogOpen(true);
       setDeleteDialogTitle('Delete Role');
-      setDeleteDialogDescription(`Are you sure you want to delete ${roleName} ?`);
+      setDeleteDialogDescription(`${roleName} will be deleted permanently. You can't undo this action.`);
       setDeleteDialogHandleSubmit(() => () => handleDeleteRoleSubmit(id));
     } else if (action === 'view') {
       navigate(`${id}`, { state: { roleName: roleName } });

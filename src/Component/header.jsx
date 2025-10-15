@@ -1,10 +1,12 @@
 import { useContext } from "react";
 import { globalContext } from "../context/context";
 import "../css/header.css";
+import { useNavigate } from "react-router-dom";
 
 
 function Header() {
   const { openSidebar, setOpenSidebar } = useContext(globalContext);
+  const navigate = useNavigate();
   return (
     <div className="header-container" >
       <button onClick={() => setOpenSidebar(!openSidebar)} className="header-button">
@@ -12,7 +14,7 @@ function Header() {
       </button>
 
       <div>
-        <img src="/avatar.svg" alt="" />
+        <img src="/avatar.svg" alt="" onClick={() => navigate('/profile')} style={{ cursor: 'pointer' }}/>
       </div>
     </div>
   );

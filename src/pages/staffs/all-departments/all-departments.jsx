@@ -232,7 +232,7 @@ function AllDepartments() {
     } else if (action === 'delete') {
       setDeleteDialogOpen(true);
       setDeleteDialogTitle('Delete Department');
-      setDeleteDialogDescription(`Are you sure you want to delete ${departmentName} ?`);
+      setDeleteDialogDescription(`"${departmentName}" will be deleted permanently. You can't undo this action.`);
       setDeleteDialogHandleSubmit(() => () => handleDeleteDepartmentSubmit(id));
     } else if (action === 'view') {
       navigate(`${id}`, { state: { departmentName: departmentName } });

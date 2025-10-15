@@ -2,11 +2,6 @@ import { Outlet, Route, Routes } from 'react-router-dom'
 import './App.css'
 import CommonLayout from './pages/common-layout/common-layout'
 import { GlobalProvider } from './context/context'
-import AllCompanies from './pages/companies/all-companies/all-companies'
-import AddCompany from './pages/companies/add-company/add-company'
-import EditCompany from './pages/companies/edit-company/edit-company'
-import ViewCompany from './pages/companies/view-company/view-company'
-import CompanyStaffs from './pages/companies/company-staffs/company-staffs'
 import AllStaffs from './pages/staffs/all-staffs/all-staffs'
 import AddStaff from './pages/staffs/add-staff/add-staff'
 import EditStaff from './pages/staffs/edit-staff/edit-staff'
@@ -14,20 +9,20 @@ import AllDepartments from './pages/staffs/all-departments/all-departments'
 import SingleDepartment from './pages/staffs/single-department/single-department'
 import AllRoles from './pages/staffs/all-roles/all-roles'
 import SingleRole from './pages/staffs/single-role/single-role'
-import AllAnnouncements from './pages/announcements/all-announcements/all-announcements'
 import AllBills from './pages/billings/all-bills/all-bills'
-import CreateInvoice from './pages/billings/create-invoice/create-invoice'
 import ViewInvoice from './pages/billings/view-invoice/view-invoice'
-import EditInvoice from './pages/billings/edit-invoice/edit-invoice'
-import WorkingHours from './pages/working-hours/working-hours/working-hours'
-import Holidays from './pages/working-hours/holidays/holidays'
-import SupportTickets from './pages/support-tickets/support-tickets'
-import ViewTicket from './pages/support-tickets/view-ticket/view-ticket'
 import Login from './pages/authentication/login/login'
 import ForgetPassword from './pages/authentication/forget-password/forget-paasword/forget-password'
 import NewPassword from './pages/authentication/forget-password/new-password/new-password'
 import OtpVerify from './pages/authentication/forget-password/otp-verify/otp-verify'
 import Success from './pages/authentication/forget-password/success/success'
+import Queue from './pages/queue/queue'
+import ViewProfile from './pages/profile/view-profile/view-profile'
+import EditProfile from './pages/profile/edit-profile/edit-profile'
+import AllRaiseADispute from './pages/raise-a-dispute/all-raise-a-dispute/all-raise-a-dispute'
+import AddDispute from './pages/raise-a-dispute/add-dispute/add-dispute'
+import EditDispute from './pages/raise-a-dispute/edit-dispute/edit-dispute'
+import ViewDispute from './pages/raise-a-dispute/view-dispute/view-dispute'
 
 function App() {
 
@@ -49,16 +44,7 @@ function App() {
         <Route path="/" element={<CommonLayout />}>
           <Route path="dashboard" element={<>Dashboard</>} />
 
-
-          <Route path="companies" element={<Outlet />}>
-            <Route index element={<AllCompanies />} />
-            <Route path="add-company" element={<AddCompany />} />
-            <Route path="edit-company/:id" element={<EditCompany />} />
-            <Route path="view-company/:id" element={<Outlet />}>
-              <Route index element={<ViewCompany />} />
-              <Route path="staffs" element={<CompanyStaffs />} />
-            </Route>
-          </Route>
+          {/* <Route path='test-route/:id' element={<ViewTicket />} /> */}
 
 
           <Route path="staffs" element={<Outlet />}>
@@ -75,30 +61,27 @@ function App() {
             </Route>
           </Route>
 
-
+          <Route path="profile" element={<Outlet />}>
+            <Route index element={<ViewProfile />} />
+            <Route path="edit-profile" element={<EditProfile />} />
+          </Route>
 
           <Route path="billings" element={<Outlet />}>
             <Route index element={<AllBills />} />
-            <Route path="create-invoice" element={<CreateInvoice />} />
             <Route path="view-invoice/:id" element={<ViewInvoice />} />
-            <Route path="edit-invoice/:id" element={<EditInvoice />} />
           </Route>
           <Route path="reports" element={<>Reports</>} />
 
-
-          <Route path="announcements" element={<AllAnnouncements />} />
-
-
-          <Route path="support-tickets" element={<Outlet />}>
-            <Route index element={<SupportTickets />} />
-            <Route path="view-ticket/:id" element={<ViewTicket />} />
+          <Route path="raise-a-dispute" element={<Outlet/>}>
+            <Route index element={<AllRaiseADispute />} />
+            <Route path="add-ticket" element={<AddDispute />} />
+            <Route path="edit-ticket/:id" element={<EditDispute />} />
+            <Route path="view-ticket/:id" element={<ViewDispute />} />
           </Route>
+          <Route path="queue" element={<Queue />} />
 
 
-          <Route path="working-hours" element={<Outlet />}>
-            <Route index element={<WorkingHours />} />
-            <Route path="holidays" element={<Holidays />} />
-          </Route>
+
         </Route>
       </Routes>
     </GlobalProvider>
